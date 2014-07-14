@@ -3,7 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<title>Deliverance</title>
-	<meta name="description" content="">
+	<meta name="description" content="Improved version of the deliverance menu and order system.">
+	<meta name="author" content="Luca Lischetti">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/main.css">
@@ -24,7 +25,7 @@
 				</div>
 			</div>
 		</form>
-		<div class="navbar-right" style="margin-right:15px;">
+		<div class="navbar-right order__saver">
 			<button type="button" class="btn btn-danger navbar-btn" ng-click="clearOrder()" ng-show="orderTotal > 0">Clear</button>
 			<button type="button" class="btn btn-success navbar-btn" ng-click="saveOrder()">Save</button>
 		</div>
@@ -38,6 +39,11 @@
 				<span ng-if="dish.vegetarian" class="label label-success">V</span>
 				<span ng-if="dish.new" class="label label-warning">new</span>
 				<span ng-if="dish.light" class="label label-info">light</span>
+				<ul class="dish__extra" ng-if="dish.extra">
+					<li class="btn" ng-class="{'btn-success': extra.selected}" ng-repeat="extra in dish.extra" ng-click="addExtra(extra, dish, $event, true)">
+						{{extra.name}} <span class="badge">{{extra.price | currency : "£"}}</span>
+					</li>
+				</ul>
 			</li>
 			<li class="order__total list-group-item"><span class="badge">{{orderTotal | currency : "£"}}</span>Total</li>
 		</ul>
@@ -51,6 +57,11 @@
 				<span ng-if="dish.vegetarian" class="label label-success">V</span>
 				<span ng-if="dish.new" class="label label-warning">new</span>
 				<span ng-if="dish.light" class="label label-info">light</span>
+				<ul class="dish__extra" ng-if="dish.extra">
+					<li class="btn" ng-class="{'btn-success': extra.selected}" ng-repeat="extra in dish.extra" ng-click="addExtra(extra, dish, $event)">
+						{{extra.name}} <span class="badge">{{extra.price | currency : "£"}}</span>
+					</li>
+				</ul>
 			</li>
 		</ul>
 	</section>

@@ -43,6 +43,9 @@
 			$scope.orderTotal += dish.price;
 			$scope.maxPrice -= dish.price;
 			$scope.order.push(angular.copy(dish));
+			dish.extra.forEach(function(el){
+				el.selected = false;
+			});
 		};
 
 		$scope.removeFromOrder = function(dish){
@@ -50,6 +53,24 @@
 			$scope.maxPrice += dish.price;
 			var index = $scope.order.indexOf(dish);
 			$scope.order.splice(index, 1);
+		};
+		$scope.addExtra = function(extra, dish, e, order){
+			e.stopPropagation();
+			if (extra.selected) {
+				extra.selected = false;
+				dish.price -= extra.price;
+				if (order) {
+					$scope.orderTotal -= extra.price;
+					$scope.maxPrice += extra.price;
+				}
+			} else {
+				extra.selected = true;
+				dish.price += extra.price;
+				if (order) {
+					$scope.orderTotal += extra.price;
+					$scope.maxPrice -= extra.price;
+				}
+			}
 		};
 	}]);
 

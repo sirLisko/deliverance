@@ -19,7 +19,21 @@
 	background-color: #f5f5f5;
 	cursor: pointer;
 }
+.dish__extra {
+	padding-left: 0;
+	padding-top: 15px;
+}
+.dish__extra li {
+	cursor: default;
+	display: inline-block;
+	margin-right: 15px;
+	margin-bottom: 10px;
+	border-color: #ccc;
+}
 
+.order__saver {
+	margin-right: 15px;
+}
 .order__total {
 	font-weight: bold;
 }
