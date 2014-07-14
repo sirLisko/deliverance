@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Deliverance</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body ng-app="deliverance">
+<div class="container" ng-controller="DeliveranceController">
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="navbar-left" style="margin-right:15px;">
+			<span class="navbar-text">Order by:</span>
+			<button type="button" class="btn btn-default navbar-btn" ng-click="predicate = 'name'; reverse=!reverse">Dish</button>
+			<button type="button" class="btn btn-default navbar-btn" ng-click="predicate = 'price'; reverse=!reverse">Price</button>
+		</div>
+		<form class="navbar-form navbar-left" role="search">
+			<div class="filter--value form-group">
+				<input type="text" class="form-control" placeholder="Search" ng-model="searchText">
+				<div class="filter--price input-group">
+					<span class="input-group-addon">£</span><input type="float" class="form-control" ng-model="maxPrice">
+				</div>
+			</div>
+		</form>
+		<div class="navbar-right" style="margin-right:15px;">
+			<button type="button" class="btn btn-danger navbar-btn" ng-click="clearOrder()" ng-show="orderTotal > 0">Clear</button>
+			<button type="button" class="btn btn-success navbar-btn" ng-click="saveOrder()">Save</button>
+		</div>
+	</nav>
+	<section class="order__container" ng-show="orderTotal > 0">
+		<header class="menu__header">~ Order ~</header>
+		<ul class="list-group"> 
+			<li class="dish__container list-group-item" ng-repeat="dish in order" ng-click="removeFromOrder(dish)">
+				<span class="badge">{{dish.price | currency : "£"}}</span>{{dish.name}} - {{dish.menu}}
+				<span ng-if="dish.hot" class="label label-danger">hot</span>
+				<span ng-if="dish.vegetarian" class="label label-success">V</span>
+				<span ng-if="dish.new" class="label label-warning">new</span>
+				<span ng-if="dish.light" class="label label-info">light</span>
+			</li>
+			<li class="order__total list-group-item"><span class="badge">{{orderTotal | currency : "£"}}</span>Total</li>
+		</ul>
+	</section>
+	<section class="menu__container">
+		<header class="menu__header">~ Menu ~</header>
+		<ul class="list-group"> 
+			<li class="dish__container list-group-item" ng-repeat="dish in dishes | filter:searchText | orderBy:predicate:reverse | lt:maxPrice" ng-click="addToOrder(dish)">
+				<span class="badge">{{dish.price | currency : "£"}}</span>{{dish.name}} - {{dish.menu}} - {{dish.course}}
+				<span ng-if="dish.hot" class="label label-danger">hot</span>
+				<span ng-if="dish.vegetarian" class="label label-success">V</span>
+				<span ng-if="dish.new" class="label label-warning">new</span>
+				<span ng-if="dish.light" class="label label-info">light</span>
+			</li>
+		</ul>
+	</section>
+</div>
+<script src="js/vendor/angular-1.3.0-b10.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

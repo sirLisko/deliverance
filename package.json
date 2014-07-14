@@ -1,0 +1,30 @@
+{
+  "name": "deliverance",
+  "version": "0.1.0",
+  "description": "improved version of the deliverance menu",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sirLisko/deliverance.git"
+  },
+  "keywords": [
+    "menu",
+    "deliverance",
+    "order"
+  ],
+  "author": "Luca Lischetti",
+  "bugs": {
+    "url": "https://github.com/sirLisko/deliverance/issues"
+  },
+  "homepage": "https://github.com/sirLisko/deliverance",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "dependencies": {
+    "express": "^4.4.3",
+    "deliverance-scraper": "git+ssh://git@github.com:sirLisko/deliverance-scraper.git"
+  }
+}

@@ -1,0 +1,25 @@
+.container {
+	margin-top: 20px;
+}
+
+.menu__header {
+	font-weight: bold;
+	text-align: center;
+}
+
+.filter--value > * {
+	float: left;
+}
+.filter--price {
+	margin-left: 10px;
+	width: 100px;
+}
+
+.dish__container:hover {
+	background-color: #f5f5f5;
+	cursor: pointer;
+}
+
+.order__total {
+	font-weight: bold;
+}
