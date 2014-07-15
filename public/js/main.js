@@ -43,9 +43,11 @@
 			$scope.orderTotal += dish.price;
 			$scope.maxPrice -= dish.price;
 			$scope.order.push(angular.copy(dish));
-			dish.extra.forEach(function(el){
-				el.selected = false;
-			});
+			if (dish.extra) {
+				dish.extra.forEach(function(el){
+					el.selected = false;
+				});
+			}
 		};
 
 		$scope.removeFromOrder = function(dish){
@@ -54,6 +56,7 @@
 			var index = $scope.order.indexOf(dish);
 			$scope.order.splice(index, 1);
 		};
+
 		$scope.addExtra = function(extra, dish, e, order){
 			e.stopPropagation();
 			if (extra.selected) {
@@ -64,6 +67,7 @@
 					$scope.maxPrice += extra.price;
 				}
 			} else {
+				if ((order ? 0 : dish.price) + $scope.orderTotal + extra.price > 15) { return false; }
 				extra.selected = true;
 				dish.price += extra.price;
 				if (order) {

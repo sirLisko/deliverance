@@ -34,7 +34,7 @@
 		<header class="menu__header">~ Order ~</header>
 		<ul class="list-group"> 
 			<li class="dish__container list-group-item" ng-repeat="dish in order" ng-click="removeFromOrder(dish)">
-				<span class="badge">{{dish.price | currency : "£"}}</span>{{dish.name}} - {{dish.menu}}
+				<span class="badge">{{dish.price | currency : "£"}}</span>{{dish.name}} - {{dish.menu}} - {{dish.course}}
 				<span ng-if="dish.hot" class="label label-danger">hot</span>
 				<span ng-if="dish.vegetarian" class="label label-success">V</span>
 				<span ng-if="dish.new" class="label label-warning">new</span>

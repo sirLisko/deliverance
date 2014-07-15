@@ -25,6 +25,6 @@
   },
   "dependencies": {
     "express": "^4.4.3",
-    "deliverance-scraper": "git+ssh://git@github.com:sirLisko/deliverance-scraper.git"
+    "deliverance-scraper": "git://github.com/sirLisko/deliverance-scraper.git"
   }
 }
