@@ -10,23 +10,19 @@
 
 		$scope.dishes = [];
 
-    	$scope.maxPrice = 15.00;
-		$scope.orderTotal = 0;
-		$scope.order = [];
-
-		if(lastOrder = localStorage.getItem('lastOrder')) {
-			lastOrder = JSON.parse(lastOrder);
-			$scope.maxPrice = lastOrder.maxPrice;
-			$scope.orderTotal = lastOrder.orderTotal;
-			$scope.order = lastOrder.order;
-		}
-
 		$http.get('/v1/menu').success(function(data){
 			$scope.dishes = data;
 		});
 
+		function calculateTotals (price) {
+			$scope.maxPrice = parseFloat($scope.maxPrice);
+			$scope.orderTotal += price;
+			$scope.maxPrice -= price;
+			$scope.maxPrice = $scope.maxPrice.toFixed(2);
+		}
+
 		$scope.clearOrder = function(){
-			$scope.maxPrice = 15.00;
+			$scope.maxPrice = (15).toFixed(2);
 			$scope.order = [];
 			$scope.orderTotal = 0;
 		};
@@ -40,8 +36,7 @@
 		};
 
 		$scope.addToOrder = function(dish){
-			$scope.orderTotal += dish.price;
-			$scope.maxPrice -= dish.price;
+			calculateTotals(dish.price);
 			$scope.order.push(angular.copy(dish));
 			if (dish.extra) {
 				dish.extra.forEach(function(el){
@@ -51,8 +46,7 @@
 		};
 
 		$scope.removeFromOrder = function(dish){
-			$scope.orderTotal -= dish.price;
-			$scope.maxPrice += dish.price;
+			calculateTotals(-dish.price);
 			var index = $scope.order.indexOf(dish);
 			$scope.order.splice(index, 1);
 		};
@@ -63,19 +57,26 @@
 				extra.selected = false;
 				dish.price -= extra.price;
 				if (order) {
-					$scope.orderTotal -= extra.price;
-					$scope.maxPrice += extra.price;
+					calculateTotals(-extra.price);
 				}
 			} else {
 				if ((order ? 0 : dish.price) + $scope.orderTotal + extra.price > 15) { return false; }
 				extra.selected = true;
 				dish.price += extra.price;
 				if (order) {
-					$scope.orderTotal += extra.price;
-					$scope.maxPrice -= extra.price;
+					calculateTotals(extra.price);
 				}
 			}
 		};
+
+		if(lastOrder = localStorage.getItem('lastOrder')) {
+			lastOrder = JSON.parse(lastOrder);
+			$scope.maxPrice = lastOrder.maxPrice;
+			$scope.orderTotal = lastOrder.orderTotal;
+			$scope.order = lastOrder.order;
+		} else {
+			$scope.clearOrder();
+		}
 	}]);
 
 	app.filter('lt', function () {
