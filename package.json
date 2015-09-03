@@ -4,7 +4,8 @@
   "description": "improved version of the deliverance menu",
   "main": "app.js",
   "scripts": {
-    "postinstall": "webpack"
+    "postinstall": "webpack",
+    "start": "node app"
   },
   "repository": {
     "type": "git",
@@ -27,8 +28,13 @@
     "angular": "^1.6.1",
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
+    "bootstrap": "^3.3.7",
+    "css-loader": "^0.26.1",
     "deliverance-scraper": "git://github.com/sirLisko/deliverance-scraper.git",
     "express": "^4.4.3",
+    "file-loader": "^0.10.0",
+    "style-loader": "^0.13.1",
+    "url-loader": "^0.5.7",
     "webpack": "^2.2.1"
   },
   "devDependencies": {
