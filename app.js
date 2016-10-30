@@ -8,7 +8,8 @@ var fs = require('fs');
 var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 
-var menuCached;
+// deliverance.co.uk is not longer available
+var menuCached = require('./menuCached.json').menuCached;
 
 if (fs.existsSync('./config.json')) {
 	var config = require('./config.json');
