@@ -5,4 +5,4 @@ import menuService from './modules/menu.service'
 
 angular.module('deliverance', [])
   .factory('menuService', menuService)
-  .controller('DeliveranceController', menuController).name
+  .controller('DeliveranceController', menuController)
