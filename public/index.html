@@ -41,36 +41,14 @@
 	<section class="order__container" ng-show="menu.orderTotal > 0">
 		<header class="menu__header">~ Order ~</header>
 		<ul class="list-group"> 
-			<li class="dish__container list-group-item" ng-repeat="dish in menu.order" ng-click="menu.removeFromOrder(dish)">
-				<span class="badge">{{dish.price | currency : "£"}}</span>{{dish.name}} - {{dish.menu}} - {{dish.course}}
-				<span ng-if="dish.hot" class="label label-danger">hot</span>
-				<span ng-if="dish.vegetarian" class="label label-success">V</span>
-				<span ng-if="dish.new" class="label label-warning">new</span>
-				<span ng-if="dish.light" class="label label-info">light</span>
-				<ul class="dish__extra" ng-if="dish.extra">
-					<li class="btn" ng-class="{'btn-success': extra.selected}" ng-repeat="extra in dish.extra" ng-click="menu.addExtra(extra, dish, $event, true)">
-						{{extra.name}} <span class="badge">{{extra.price | currency : "£"}}</span>
-					</li>
-				</ul>
-			</li>
+			<dish-menu class="dish__container list-group-item" ng-repeat="dish in menu.order" ng-click="menu.removeFromOrder(dish)" dish-menu-order="true"></dish-menu>
 			<li class="order__total list-group-item"><span class="badge">{{menu.orderTotal | currency : "£"}}</span>Total</li>
 		</ul>
 	</section>
   <section class="menu__container" ng-if="menu.dishes.length">
 		<header class="menu__header">~ Menu ~</header>
     <ul class="list-group"> 
-			<li class="dish__container list-group-item" ng-repeat="dish in menu.dishes | filter:menu.searchText | orderBy:menu.predicate:menu.reverse" ng-if="dish.price < menu.maxPrice" ng-click="menu.addToOrder(dish)">
-				<span class="badge">{{dish.price | currency : "£"}}</span>{{dish.name}} - {{dish.menu}} - {{dish.course}}
-				<span ng-if="dish.hot" class="label label-danger">hot</span>
-				<span ng-if="dish.vegetarian" class="label label-success">V</span>
-				<span ng-if="dish.new" class="label label-warning">new</span>
-				<span ng-if="dish.light" class="label label-info">light</span>
-				<ul class="dish__extra" ng-if="dish.extra">
-					<li class="btn" ng-class="{'btn-success': extra.selected}" ng-repeat="extra in dish.extra" ng-click="menu.addExtra(extra, dish, $event)">
-						{{extra.name}} <span class="badge">{{extra.price | currency : "£"}}</span>
-					</li>
-				</ul>
-			</li>
+			<dish-menu class="dish__container list-group-item" ng-repeat="dish in menu.dishes | filter:menu.searchText | orderBy:menu.predicate:menu.reverse" ng-if="dish.price < menu.maxPrice" ng-click="menu.addToOrder(dish)"></dish-menu>
 		</ul>
 	</section>
 </div>
