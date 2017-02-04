@@ -7,7 +7,8 @@ module.exports = {
   module: {
     loaders: [
       { test: /\.js$/, loaders: ['babel-loader'], exclude: /node_modules/ },
-      { test: /\.css$/, use: [ 'style-loader', 'css-loader' ] }
+      { test: /\.css$/, loader: ['style-loader', 'css-loader'] },
+      { test: /\.html$/, loader: ['html-loader'] }
     ]
   },
   output: {

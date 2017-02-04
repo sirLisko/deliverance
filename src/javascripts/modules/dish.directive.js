@@ -1,22 +1,10 @@
+import template from './dish.directive.html'
+
 export default class DishDirective {
   constructor () {
-    this.template = `
-        <li>
-            <span class="badge">{{dish.price | currency : "£"}}</span>{{order}}{{dish.name}} - {{dish.menu}} - {{dish.course}}
-            <span ng-if="dish.hot" class="label label-danger">hot</span>
-            <span ng-if="dish.vegetarian" class="label label-success">V</span>
-            <span ng-if="dish.new" class="label label-warning">new</span>
-            <span ng-if="dish.light" class="label label-info">light</span>
-            <ul class="dish__extra" ng-if="dish.extra">
-                <li class="btn" ng-class="{'btn-success': extra.selected}" ng-repeat="extra in dish.extra" ng-click="menu.addExtra(extra, dish, $event, order)">
-                    {{extra.name}} <span class="badge">{{extra.price | currency : "£"}}</span>
-                </li>
-            </ul>
-        </li>
-    `
-    this.restrict = 'EA'
+    this.template = template
+    this.restrict = 'E'
     this.replace = true
-    this.scope = true
   }
 
   link (scope, elm, attr) {
