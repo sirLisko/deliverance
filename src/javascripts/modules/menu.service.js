@@ -6,6 +6,10 @@ export default class MenuService {
   getMenu () {
     return this.$http.get('/v1/menu').then(data => data.data)
   }
+
+  static menuServiceFactory ($http) {
+    return new MenuService($http)
+  }
 }
 
-MenuService.$inject = ['$http']
+MenuService.menuServiceFactory.$inject = ['$http']
